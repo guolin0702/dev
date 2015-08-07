@@ -1,12 +1,68 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xmlns="http://java.sun.com/xml/ns/javaee" 
-    xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
-    xsi:schemaLocation="http://java.sun.com/xml/ns/javaee 
-    http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
-    id="WebApp_ID" version="2.5">
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:web="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" id="WebApp_ID" version="2.5">
   <display-name>Archetype Created Web Application</display-name>
   <welcome-file-list>
-      <welcome-file>index.html</welcome-file>
+    <welcome-file>index.html</welcome-file>
   </welcome-file-list>
+    <context-param>
+    <param-name>contextConfigLocation</param-name>
+    <param-value>/WEB-INF/cxfWebservice.xml,/WEB-INF/applicationContext.xml</param-value>
+  </context-param>
+  <listener>
+    <listener-class>
+		org.springframework.web.context.ContextLoaderListener
+	</listener-class>
+  </listener>
+  <servlet>
+    <description></description>
+    <display-name>HelloWorld</display-name>
+    <servlet-name>HelloWorld</servlet-name>
+    <servlet-class>com.demo.web.HelloWorld</servlet-class>
+    <init-param>
+      <description>User debug mode, outputs user details on each page</description>
+      <param-name>debugUsers</param-name>
+      <param-value>true</param-value>
+    </init-param>
+    <load-on-startup>1</load-on-startup>
+  </servlet>
+  
+  <servlet>
+    <servlet-name>CXFServlet</servlet-name>
+    <servlet-class>org.apache.cxf.transport.servlet.CXFServlet</servlet-class>
+    <load-on-startup>2</load-on-startup>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>CXFServlet</servlet-name>
+    <url-pattern>/services/*</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>HelloWorld</servlet-name>
+    <url-pattern>/hello.do</url-pattern>
+  </servlet-mapping>
+  <filter>
+    <display-name>LogFilter</display-name>
+    <filter-name>LogFilter</filter-name>
+    <filter-class>com.demo.web.LogFilter</filter-class>
+    <init-param>
+      <param-name>test-param</param-name>
+      <param-value>This parameter is for testing.</param-value>
+    </init-param>
+  </filter>
+  <filter-mapping>
+    <filter-name>LogFilter</filter-name>
+    <url-pattern>/*</url-pattern>
+  </filter-mapping>
+  <filter>
+    <display-name>SecondFilter</display-name>
+    <filter-name>SecondFilter</filter-name>
+    <filter-class>com.demo.web.SecondFilter</filter-class>
+  </filter>
+  <filter-mapping>
+    <filter-name>SecondFilter</filter-name>
+    <url-pattern>/*</url-pattern>
+  </filter-mapping>
+  <listener>
+    <listener-class>com.demo.web.MyContextListener</listener-class>
+  </listener>
+
 </web-app>
