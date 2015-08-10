@@ -8,5 +8,7 @@
 	<!-- scan service in the package -->
 	<context:component-scan base-package="com.demo.service" />
 	<context:component-scan base-package="com.demo.ws.service" /> 	
+	<context:component-scan base-package="com.e2.service" />
+	<context:component-scan base-package="com.e2.ws.service" /> 	
 </beans>
 

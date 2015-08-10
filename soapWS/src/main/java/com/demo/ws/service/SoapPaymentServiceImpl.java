@@ -32,7 +32,7 @@ public class SoapPaymentServiceImpl implements ISoapPaymentService {
 		return paymentService.checkBlance(accountId);
 	}
 
-	public void setPaymentService(PaymentService paymentService) {
-		this.paymentService = paymentService;
-	}
+//	public void setPaymentService(PaymentService paymentService) {
+//		this.paymentService = paymentService;
+//	}
 }
